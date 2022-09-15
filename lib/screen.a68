@@ -1,0 +1,73 @@
+[ 1:columns, 1:rows ] STRING screen;
+POS cursor := (1, 1);
+
+
+PROC clear = VOID: (
+  VOID( system("clear") );
+
+  FOR i TO rows DO
+    FOR j TO columns DO
+      screen[j,i] := " "
+    OD
+  OD;
+
+  refresh
+);
+
+PROC refresh = VOID: (
+  VOID( system("clear") );
+
+  FOR i TO rows DO
+    move cursor(0, i);
+    print(screen[,i])
+  OD
+);
+
+PROC move cursor = (POSORINT x, INT y) VOID: (
+  POS pos = CASE x IN
+    (POS res): res,
+    (INT res): POS(
+      res,
+      y
+    )
+  ESAC;
+
+  print(REPR 27 + "[" + whole(y OF pos, 0) + ";" + whole(x OF pos, 0) + "f")
+);
+
+PROC str at = (STRING str, POS pos) VOID: (
+  cursor := pos;
+
+  FOR i TO UPB str DO
+    screen[x OF cursor,y OF cursor] := str[i];
+
+    x OF cursor +:= 1;
+    IF x OF cursor > columns THEN
+      y OF cursor +:= 1;
+      x OF cursor := 0
+    FI
+  OD
+);
+
+PROC ch at = (STRING ch, POS pos) VOID: (
+  cursor := pos;
+
+  STRING ch at screen = screen[x OF cursor,y OF cursor];
+  STRING new ch := ch;
+
+  IF
+    (ch = "▄" AND ch at screen = "▀") OR
+    (ch = "▀" AND ch at screen = "▄") OR
+    ch at screen = "█"
+  THEN
+    new ch := "█"
+  FI;
+
+  screen[x OF cursor,y OF cursor] := new ch;
+
+  x OF cursor +:= 1;
+  IF x OF cursor > columns THEN
+    y OF cursor +:= 1;
+    x OF cursor := 0
+  FI
+)
