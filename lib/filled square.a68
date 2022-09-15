@@ -1,0 +1,24 @@
+
+PROC filled square = (POS top point 1, top point 2, bottom point 1, bottom point 2) [] POS: (
+  FLEX [0] POS pixels;
+
+  [] POS
+    left points = line(top point 1, bottom point 1),
+    right points = line(top point 2, bottom point 2);
+
+  FOR i TO UPB left points DO pixels +:= left points[i] OD;
+  FOR i TO UPB right points DO pixels +:= right points[i] OD;
+
+  [] POS
+    bigger side points = (UPB left points >= UPB right points | left points | right points),
+    smaller side points = (UPB left points < UPB right points | left points | right points);
+
+  FOR i TO UPB bigger side points DO
+    INT point at smaller = (i > UPB smaller side points | UPB smaller side points | i);
+    [] POS line pixels = line(bigger side points[i], smaller side points[point at smaller]);
+
+    FOR i TO UPB line pixels DO pixels +:= line pixels[i] OD
+  OD;
+
+  pixels
+)
