@@ -9,21 +9,21 @@ PROC draw = ([] [] POS schemes, POS pos) VOID: (
 
       IF ODD y OF pixel = FALSE THEN
         WHILE y OF scheme[j] = y OF pixel DO
-          ch at("▄", (x OF scheme[j] + x OF pos, ENTIER(y OF scheme[j] / 2)));
+          ch at("▄", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2)));
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
         OD
       ELSE
         WHILE y OF scheme[j] = y OF pixel DO
-          ch at("▀", (x OF scheme[j] + x OF pos, ENTIER(y OF scheme[j] / 2 + 0.5)));
+          ch at("▀", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2 + 0.5)));
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
         OD;
 
         WHILE y OF scheme[j] = y OF pixel + 1 DO
-          ch at("▄", (x OF scheme[j] + x OF pos, ENTIER(y OF scheme[j] / 2)));
+          ch at("▄", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2)));
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
