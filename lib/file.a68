@@ -1,0 +1,59 @@
+
+PROC read file = (STRING path) [] STRING: (
+  FILE file;
+  STRING line;
+  FLEX [0] STRING res := ();
+
+  VOID( open(file, path, stand in channel) );
+
+  on logical file end(file, (REF FILE skip) BOOL: done);
+
+  DO
+    getf(file, ($gl$, line));
+    res +:= line
+  OD;
+
+  done:
+  close(file);
+
+  res
+);
+
+PROC write file = (STRING path, [] STRING new contents) VOID: (
+  FILE file;
+
+  VOID( open(file, path, stand out channel) );
+
+  FOR i TO UPB new contents DO
+    putf(file, ($gl$, new contents[i]))
+  OD;
+
+  close(file)
+);
+
+PROC write in file = (STRING path, new content) VOID: (
+  FILE file;
+  [] STRING content = read file(path);
+
+  VOID( open(file, path, stand out channel) );
+
+  put(file, content);
+  put(file, new content);
+
+  close(file)
+);
+
+PROC write on file = (STRING path, new content) VOID: (
+  FILE file;
+  [] STRING content = read file(path);
+
+  VOID( open(file, path, stand out channel) );
+
+  FOR i TO UPB content DO
+    putf(file, ($gl$, content[i]))
+  OD;
+
+  putf(file, ($gl$, new content));
+
+  close(file)
+)
