@@ -1,0 +1,21 @@
+
+# Array #
+OP +:= = (REF FLEX [] POS arr, POS item) VOID: (
+  [ LWB arr:UPB arr + 1 ] POS new;
+  new[ LWB arr:UPB arr ] := arr;
+  new[UPB arr + 1] := item;
+  arr := new
+);
+
+OP +:= = (REF FLEX [] POS arr, [] POS items) VOID: (
+  FOR i TO UPB items DO
+    arr +:= items[i]
+  OD
+);
+
+OP +:= = (REF FLEX [] STRING arr, STRING item) VOID: (
+  [ LWB arr:UPB arr + 1 ] STRING new;
+  new[ LWB arr:UPB arr ] := arr;
+  new[UPB arr + 1] := item;
+  arr := new
+)
