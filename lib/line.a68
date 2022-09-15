@@ -1,0 +1,27 @@
+
+PROC line = (POS from, to) [] POS: (
+  FLEX [0] POS scheme;
+
+  REAL
+    dx = x OF to - x OF from,
+    dy = y OF to - y OF from,
+    len = (ABS dx >= ABS dy|ABS dx|ABS dy);
+
+  REAL
+    delta x = dx / len,
+    delta y = dy / len;
+  REAL
+    x := x OF from,
+    y := y OF from;
+
+  scheme +:= POS (ROUND x, ROUND y);
+
+  FOR i TO ENTIER len DO
+    x +:= delta x;
+    y +:= delta y;
+
+    scheme +:= POS (ROUND x, ROUND y)
+  OD;
+
+  scheme
+)
