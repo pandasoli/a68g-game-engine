@@ -1,29 +1,38 @@
 
-PROC draw = ([] [] POS schemes, POS pos) VOID: (
+PROC draw = (SCHEMES schemes, POS pos) VOID: (
   FOR i TO UPB schemes DO
-    [] POS scheme = schemes[i];
+    SCHEME scheme = schemes[i];
     INT j := 1;
 
     WHILE j <= UPB scheme DO
-      POS pixel = scheme[j];
+      PIXEL pixel = scheme[j];
 
       IF ODD y OF pixel = FALSE THEN
         WHILE y OF scheme[j] = y OF pixel DO
-          ch at("▄", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2)));
+          ch at(
+            (value OF pixel = "" | (ODD y OF scheme[j] | "▀" | "▄") | value OF scheme[j]),
+            (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2))
+          );
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
         OD
       ELSE
         WHILE y OF scheme[j] = y OF pixel DO
-          ch at("▀", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2 + 0.5)));
+          ch at(
+            (value OF pixel = "" | (ODD y OF scheme[j] | "▀" | "▄") | value OF scheme[j]),
+            (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2 + 0.5))
+          );
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
         OD;
 
         WHILE y OF scheme[j] = y OF pixel + 1 DO
-          ch at("▄", (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2)));
+          ch at(
+            (value OF pixel = "" | (ODD y OF scheme[j] | "▀" | "▄") | value OF scheme[j]),
+            (x OF scheme[j] + (x OF pos - 1), ENTIER(y OF scheme[j] / 2))
+          );
           j +:= 1;
 
           IF j > UPB scheme THEN GO TO end FI
@@ -31,7 +40,9 @@ PROC draw = ([] [] POS schemes, POS pos) VOID: (
       FI;
 
       end: ()
-    OD
+    OD;
+
+    refresh
   OD;
 
   refresh
