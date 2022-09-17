@@ -5,36 +5,27 @@ BEGIN
 
   draw(
     (
-      line((4, 2), (5, 11)),
+      #line((4, 2), (5, 11)),
       line((7, 1), (8, 10)),
       line((10, 3), (11, 12)),
 
       bordered square(
         (40, 2), (50, 3),
         (41, 8), (51, 9)
-      ),
+      ),#
 
-      square(
-        (40, 12), (50, 13),
-        (41, 20), (51, 21)
+      canvas((5, 14), (29, 38)),
+      canvas((34, 14), (58, 38)),
+
+      central sprite(
+        "sources/mushroom.txt",
+        (4, 14),
+        (25, 25)
       )
     ),
-    (1, 1)
+    (2, 1)
   );
-
-  #FLEX [0] STRING lines;
-
-  FOR i TO rows DO
-    lines +:= whole(i, 0) + ": ";
-
-    FOR j TO columns DO
-      lines[UPB lines] := lines[UPB lines] + screen[j,i]
-    OD
-  OD;
-
-  write file("test.txt", lines);#
 
 
   VOID( sleep(4) )
-
 END
