@@ -1,21 +1,29 @@
 
-PROC filled square = (POS top point 1, top point 2, bottom point 1, bottom point 2) [] POS: (
-  FLEX [0] POS scheme;
+PROC filled square = (POS top point 1, top point 2, bottom point 1, bottom point 2) SCHEME: (
+  SCHEME scheme;
 
-  [] POS
+  SCHEME
     left points = line(top point 1, bottom point 1),
     right points = line(top point 2, bottom point 2);
 
   scheme +:= left points;
   scheme +:= right points;
 
-  [] POS
+  SCHEME
     bigger side points = (UPB left points >= UPB right points | left points | right points),
     smaller side points = (UPB left points < UPB right points | left points | right points);
 
   FOR i TO UPB bigger side points DO
     INT point at smaller = (i > UPB smaller side points | UPB smaller side points | i);
-    [] POS line scheme = line(bigger side points[i], smaller side points[point at smaller]);
+
+    PIXEL
+      at bigger = bigger side points[i],
+      at smaller = smaller side points[point at smaller];
+
+    SCHEME line scheme = line(
+      ( x OF at bigger, y OF at bigger ),
+      ( x OF at smaller, y OF at smaller )
+    );
 
     scheme +:= line scheme
   OD;
