@@ -3,8 +3,6 @@ POS cursor := (1, 1);
 
 
 PROC clear = VOID: (
-  VOID( system("clear") );
-
   FOR i TO rows DO
     FOR j TO columns DO
       screen[j,i] := " "
