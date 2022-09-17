@@ -1,13 +1,24 @@
 
 # Array #
-OP +:= = (REF FLEX [] POS arr, POS item) VOID: (
-  [ LWB arr:UPB arr + 1 ] POS new;
+OP +:= = (REF SCHEME arr, PIXEL item) VOID: (
+  [ LWB arr:UPB arr + 1 ] PIXEL new;
   new[ LWB arr:UPB arr ] := arr;
   new[UPB arr + 1] := item;
   arr := new
 );
 
-OP +:= = (REF FLEX [] POS arr, [] POS items) VOID: (
+OP + = (PIXEL px1, PIXEL px2) SCHEME: (
+  SCHEME ( px1, px2 )
+);
+
+OP + = (SCHEME schm, PIXEL px2) SCHEME: (
+  [ LWB schm:UPB schm + 1 ] PIXEL new;
+  new[ LWB schm:UPB schm ] := schm;
+  new[UPB schm + 1] := px2;
+  new
+);
+
+OP +:= = (REF SCHEME arr, SCHEME items) VOID: (
   FOR i TO UPB items DO
     arr +:= items[i]
   OD
