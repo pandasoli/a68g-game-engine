@@ -1,6 +1,6 @@
 
-PROC line = (POS from, to) [] POS: (
-  FLEX [0] POS scheme;
+PROC line = (POS from, to) SCHEME: (
+  SCHEME scheme;
 
   REAL
     dx = x OF to - x OF from,
@@ -14,13 +14,13 @@ PROC line = (POS from, to) [] POS: (
     x := x OF from,
     y := y OF from;
 
-  scheme +:= POS (ROUND x, ROUND y);
+  scheme +:= PIXEL ("", ROUND x, ROUND y);
 
-  FOR i TO ENTIER len DO
+  TO ENTIER len DO
     x +:= delta x;
     y +:= delta y;
 
-    scheme +:= POS (ROUND x, ROUND y)
+    scheme +:= PIXEL ("", ROUND x, ROUND y)
   OD;
 
   scheme
