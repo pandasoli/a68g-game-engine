@@ -3,10 +3,11 @@ PR include "lib/screen.a68" PR;
 PR include "lib/operators.a68" PR;
 PR include "lib/file.a68" PR;
 
-PR include "lib/line.a68" PR;
+PR include "lib/canvas.a68" PR;
 
-PR include "lib/square.a68" PR;
+PR include "lib/line.a68" PR;
 PR include "lib/bordered square.a68" PR;
 PR include "lib/filled square.a68" PR;
+PR include "lib/central sprite.a68" PR;
 
 PR include "lib/draw.a68" PR
