@@ -1,6 +1,6 @@
 
-PROC bordered square = (POS top point 1, top point 2, bottom point 1, bottom point 2) [] POS: (
-  FLEX [0] POS scheme;
+PROC bordered square = (POS top point 1, top point 2, bottom point 1, bottom point 2) SCHEME: (
+  SCHEME scheme;
 
   scheme +:= line(top point 1, bottom point 1);    # left #
   scheme +:= line(top point 2, bottom point 2);    # right #
