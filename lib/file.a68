@@ -1,7 +1,7 @@
 
 PROC read file = (STRING path) [] STRING: (
   FILE file;
-  STRING line;
+  STRING current line;
   FLEX [0] STRING res := ();
 
   VOID( open(file, path, stand in channel) );
@@ -9,8 +9,8 @@ PROC read file = (STRING path) [] STRING: (
   on logical file end(file, (REF FILE skip) BOOL: done);
 
   DO
-    getf(file, ($gl$, line));
-    res +:= line
+    getf(file, ($gl$, current line));
+    res +:= current line
   OD;
 
   done:
