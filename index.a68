@@ -5,8 +5,8 @@ BEGIN
 
   draw(
     (
-      #line((4, 2), (5, 11)),
-      line((7, 1), (8, 10)),
+      line((4, 2), (5, 11)),
+      #line((7, 1), (8, 10)),
       line((10, 3), (11, 12)),
 
       bordered square(
