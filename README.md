@@ -6,4 +6,7 @@
 <br/>
 <br/>
 
-I'm wating a new version of [ALGOL 68 Genie](https://jmvdveer.home.xs4all.nl/en.post.announcing-algol-68-genie.html) to keep coding this. 'Cause 3.0.8 doesn't support much loops.
+I'm wating a new version of [ALGOL 68 Genie](https://jmvdveer.home.xs4all.nl/en.post.announcing-algol-68-genie.html) to keep   
+coding this. 'Cause 3.0.8 doesn't support much loops.
+
+[About the ALGOL's error](https://stackoverflow.com/questions/73751326/algol-68-genie-insufficient-memory)
