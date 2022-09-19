@@ -5,7 +5,7 @@ PROC line = (POS from, to) SCHEME: (
   REAL
     dx = x OF to - x OF from,
     dy = y OF to - y OF from,
-    len = (ABS dx >= ABS dy|ABS dx|ABS dy);
+    len = (ABS dx >= ABS dy | ABS dx | ABS dy);
 
   REAL
     delta x = dx / len,
