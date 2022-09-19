@@ -37,12 +37,9 @@ PROC draw = (SCHEMES schemes, POS pos) VOID: (
 
           IF j > UPB scheme THEN GO TO end FI
         OD
-      FI;
-
-      end: ()
+      FI
     OD;
-
-    refresh
+    end: ()
   OD;
 
   refresh
