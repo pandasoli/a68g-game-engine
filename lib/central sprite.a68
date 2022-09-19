@@ -1,7 +1,7 @@
 
 PROC central sprite = (STRING path, POS pos, SIZE size) SCHEME: (
   [] STRING source = read file(path);
-  #SIZE sprite size := (0, UPB source);#
+  SIZE sprite size := (0, UPB source);
   SCHEME scheme;
 
   FOR line i TO UPB source DO
@@ -11,15 +11,15 @@ PROC central sprite = (STRING path, POS pos, SIZE size) SCHEME: (
       IF ch = "X" THEN
         scheme +:= PIXEL ("", ch i + x OF pos, line i + y OF pos)
       FI
-    OD#;
+    OD;
 
     IF UPB source[line i] > w OF sprite size THEN
       w OF sprite size := UPB source[line i]
-    FI#
+    FI
   OD;
 
   # Centralizing #
-  #IF
+  IF
     (w OF size > w OF sprite size) OR
     (h OF size > h OF sprite size)
   THEN
@@ -31,7 +31,7 @@ PROC central sprite = (STRING path, POS pos, SIZE size) SCHEME: (
       x OF scheme[px i] := x OF scheme[px i] + x add;
       y OF scheme[px i] := y OF scheme[px i] + y add
     OD
-  FI;#
+  FI;
 
   scheme
 )
