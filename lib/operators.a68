@@ -7,9 +7,6 @@ OP +:= = (REF SCHEME arr, PIXEL item) VOID: (
   arr := new
 );
 
-OP + = (PIXEL px1, PIXEL px2) SCHEME: (
-  SCHEME ( px1, px2 )
-);
 
 OP + = (SCHEME schm, PIXEL px2) SCHEME: (
   [ LWB schm:UPB schm + 1 ] PIXEL new;
@@ -29,4 +26,19 @@ OP +:= = (REF FLEX [] STRING arr, STRING item) VOID: (
   new[ LWB arr:UPB arr ] := arr;
   new[UPB arr + 1] := item;
   arr := new
+);
+
+# Values #
+OP + = (PIXEL px1, PIXEL px2) SCHEME: (
+  SCHEME ( px1, px2 )
+);
+
+OP + = (SCHEME scm1, SCHEME scm2) SCHEME: (
+  SCHEME res := scm1;
+
+  FOR i TO UPB scm2 DO
+    res +:= scm2[i]
+  OD;
+
+  res
 )
