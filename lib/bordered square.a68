@@ -2,10 +2,11 @@
 PROC bordered square = (POS top point 1, top point 2, bottom point 1, bottom point 2) SCHEME: (
   SCHEME scheme;
 
-  scheme +:= line(top point 1, bottom point 1);    # left #
-  scheme +:= line(top point 2, bottom point 2);    # right #
-  scheme +:= line(top point 1, top point 2);       # top #
-  scheme +:= line(bottom point 1, bottom point 2); # bottom #
+  scheme +:=
+    line(top point 1, bottom point 1) +   # left #
+    line(top point 2, bottom point 2) +   # right #
+    line(top point 1, top point 2) +      # top #
+    line(bottom point 1, bottom point 2); # bottom #
 
   scheme
 )
