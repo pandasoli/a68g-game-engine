@@ -3,11 +3,8 @@ POS cursor := (1, 1);
 
 
 PROC clear = VOID: (
-  FOR i TO rows DO
-    FOR j TO columns DO
-      screen[j,i] := " "
-    OD
-  OD;
+  [ 1:columns, 1:rows ] STRING new screen;
+  screen := new screen;
 
   refresh
 );
@@ -15,9 +12,14 @@ PROC clear = VOID: (
 PROC refresh = VOID: (
   VOID( system("clear") );
 
-  FOR i TO rows DO
-    move cursor(0, i);
-    print(screen[,i])
+  FOR line i TO rows DO
+    FOR ch i TO columns DO
+      move cursor(ch i, line i);
+      STRING ch := screen[ch i,line i];
+      IF ch = "" THEN ch := " " FI;
+
+      print(ch)
+    OD
   OD
 );
 
