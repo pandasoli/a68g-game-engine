@@ -1,0 +1,11 @@
+BEGIN
+  PR include "lib/index.a68" PR;
+
+  SCREEN foo := make screen;
+
+  (clear OF foo)(~);
+  (refresh OF foo)(~);
+  (text at OF foo)(("A", (2, 2)))
+
+
+END

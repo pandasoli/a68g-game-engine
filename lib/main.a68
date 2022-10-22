@@ -1,0 +1,68 @@
+
+MODE SCREEN = STRUCT (
+  REF [,] STRING buff,
+
+  PROC (BOOL) VOID clear, refresh,
+  PROC (STRNPOS) VOID text at
+);
+
+PROC make screen = SCREEN: (
+  [ 1:columns, 1:rows ] STRING buff;
+
+
+  PROC clear = (SCREEN self, BOOL skip) VOID: (
+    INT
+      w = 1 UPB buff OF self,
+      h = 2 UPB buff OF self;
+
+    [ 1:w, 1:h ] STRING new;
+    buff OF self := new
+  );
+
+  PROC refresh = (SCREEN self, BOOL skip) VOID: (
+    VOID( system("clear") );
+    [,] STRING buff = buff OF self;
+
+    INT
+      w = UPB buff OF self,
+      h = 2 UPB buff OF self;
+
+    FOR x TO w DO
+      FOR y TO h DO
+        STRING val := buff[x, y];
+        IF val = "" THEN val = " " FI;
+
+        move cursor((x, y));
+        print(val)
+      OD
+    OD
+  );
+
+  PROC text at = (SCREEN self, STRNPOS props) VOID: (
+    STRING str = str OF props;
+    POS pos := pos OF props;
+
+    INT w = UPB buff OF self;
+
+    FOR i TO UPB str DO
+      IF x OF pos = w THEN
+        x OF pos := 0;
+        y OF pos +:= 1
+      FI;
+
+      move cursor(pos);
+      print(str[i])
+    OD
+  );
+
+
+  SCREEN res;
+
+  buff OF res := buff;
+
+  clear OF res := clear(res,);
+  refresh OF res := refresh(res,);
+  text at OF res := text at(res,);
+
+  res
+)
