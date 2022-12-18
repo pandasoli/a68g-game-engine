@@ -1,4 +1,57 @@
 
-PROC move cursor = (POS pos) VOID: (
-  print(REPR 27 + "[" + whole(y OF pos, 0) + ";" + whole(x OF pos, 0) + "f")
+MODE SCREEN = STRUCT (
+  [,][,] STRING buff,
+
+  PROC VOID (REF SCREEN) refresh,
+
+  PROC (REF SCREEN, CHAR, POS) VOID ch at,
+  PROC (REF SCREEN, STRING, POS) VOID str at,
+
+  PROC (BOOL) VOID vcursor,
+  PROC (POS) VOID move cursor
+);
+
+PROC make screen = SCREEN: (
+  SCREEN scr;
+
+  # PROC's #
+  refresh OF scr = (REF SCREEN this) VOID: (
+    REF [,][,] STRING buff = buff OF this;
+
+    FOR rowi TO UPB buff DO
+      [,] STRING row = buff[rowi];
+
+      FOR coli TO UPB row DO
+        print(REPR 27 + "[" + whole(rowi, 0) + ";" + whole(coli, 0) + "f" + row[coli])
+      OD;
+
+      print(new line)
+    OD
+  );
+
+  vcursor OR scr = (BOOL enable) VOID: (
+    IF enable THEN print(REPR 27 + "[?25h")
+    ELSE print(REPR 27 + "[?25l")
+    END
+  );
+
+  # Variables #
+  [1:rows][1:cols] STRING buff;
+  buff OF scr := buff;
+
+  # Constructor #
+  PROC constructor = VOID: (
+    FOR row TO rows DO
+      [1:cols] STRING columns;
+
+      FOR col TO cols + 1 DO
+        columns[col] := " "
+      OD;
+
+      (buff OF scr)[row] := columns
+    OD
+  );
+  constructor;
+
+  scr
 )

@@ -1,4 +1,2 @@
 PR include "lib/types.a68" PR;
-
-PR include "lib/screen.a68" PR;
-PR include "lib/main.a68" PR
+PR include "lib/screen.a68" PR

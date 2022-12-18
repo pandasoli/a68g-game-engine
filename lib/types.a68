@@ -1,8 +1,3 @@
 
 MODE POS = STRUCT ( INT x, y );
-MODE SIZE = STRUCT ( INT w, h );
-
-MODE STRNPOS = STRUCT (
-  STRING str,
-  POS pos
-)
+MODE SIZE = STRUCT ( INT w, h )
